@@ -385,6 +385,19 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
         Long wzip = Long.parseLong(txtWZip.getText());
         Double wphone = Double.parseDouble(txtWPhone.getText());
         
+        if(fname.isBlank() || lname.isBlank() || hstreetadd.isBlank() || hunitno.isBlank() || hcity.isBlank() || hstate.isBlank() || wstreetadd.isBlank() || wunitno.isBlank() || wcity.isBlank() || wstate.isBlank()){
+        JOptionPane.showMessageDialog(this, "All fields are mandatory", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+        
+        person.setFname(fname);
+        person.setLname(lname);
+        person.setSsn(ssn);
+        person.setAge(age);
+        person.setAddress(hstreetadd, hunitno, hcity, hstate, hzip, hphone, wstreetadd, wunitno, wcity, wstate, wzip, wphone);
+        
+        JOptionPane.showMessageDialog(null, "Profile Successfully Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
+        setViewMode();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
