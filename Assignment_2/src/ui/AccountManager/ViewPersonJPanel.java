@@ -368,7 +368,23 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-       
+        String fname = txtFName.getText();
+        String lname = txtLName.getText();
+        Long ssn = Long.parseLong(txtSsn.getText());
+        int age = Integer.parseInt(txtAge.getText());
+        String hstreetadd = txtHStAdd.getText();
+        String hunitno = txtHUnit.getText();
+        String hcity = txtHCity.getText();
+        String hstate = txtHState.getText();
+        Long hzip = Long.parseLong(txtHZip.getText());
+        Double hphone = Double.parseDouble(txtHPhone.getText());
+        String wstreetadd = txtWStAdd.getText();
+        String wunitno = txtWUnit.getText();
+        String wcity = txtWCity.getText();
+        String wstate = txtWState.getText();
+        Long wzip = Long.parseLong(txtWZip.getText());
+        Double wphone = Double.parseDouble(txtWPhone.getText());
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
