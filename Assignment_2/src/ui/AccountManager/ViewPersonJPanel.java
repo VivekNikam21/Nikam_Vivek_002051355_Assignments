@@ -5,6 +5,7 @@
 package ui.AccountManager;
 
 import javax.swing.JPanel;
+import model.Address;
 import model.Person;
 import model.PersonDirectory;
 
@@ -23,6 +24,9 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = container;
         this.person = person;
+        
+        refreshTextFields();
+        setViewMode();
     }
 
     /**
@@ -399,4 +403,77 @@ public class ViewPersonJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtWUnit;
     private javax.swing.JTextField txtWZip;
     // End of variables declaration//GEN-END:variables
+
+  private void refreshTextFields(){
+        txtFName.setText(person.getFname());
+        txtLName.setText(person.getLname());
+        txtSsn.setText(String.valueOf(person.getSsn()));
+        txtAge.setText(String.valueOf(person.getAge()));
+        
+        Address add = person.getAddress();
+        txtHStAdd.setText(add.getHstreetadd());
+        txtHUnit.setText(add.getHunitno());
+        txtHCity.setText(add.getHcity());
+        txtHState.setText(add.getHstate());
+        txtHZip.setText(String.valueOf(add.getHzip()));
+        txtHPhone.setText(String.valueOf(add.getHphone()));
+        
+        txtWStAdd.setText(add.getWstreetadd());
+        txtWUnit.setText(add.getWunitno());
+        txtWCity.setText(add.getWcity());
+        txtWState.setText(add.getWstate());
+        txtWZip.setText(String.valueOf(add.getWzip()));
+        txtWPhone.setText(String.valueOf(add.getWphone()));
+    }
+    
+    private void setViewMode(){
+        
+        txtFName.setEnabled(false);
+        txtLName.setEnabled(false);
+        txtSsn.setEnabled(false);
+        txtAge.setEnabled(false);
+        
+        txtHStAdd.setEnabled(false);
+        txtHUnit.setEnabled(false);
+        txtHCity.setEnabled(false);
+        txtHState.setEnabled(false);
+        txtHZip.setEnabled(false);
+        txtHPhone.setEnabled(false);
+        
+        txtWStAdd.setEnabled(false);
+        txtWUnit.setEnabled(false);
+        txtWCity.setEnabled(false);
+        txtWState.setEnabled(false);
+        txtWZip.setEnabled(false);
+        txtWPhone.setEnabled(false);
+        
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+
+    }
+    
+    private void setEditMode(){
+        txtFName.setEnabled(true);
+        txtLName.setEnabled(true);
+        txtSsn.setEnabled(true);
+        txtAge.setEnabled(true);
+        
+        txtHStAdd.setEnabled(true);
+        txtHUnit.setEnabled(true);
+        txtHCity.setEnabled(true);
+        txtHState.setEnabled(true);
+        txtHZip.setEnabled(true);
+        txtHPhone.setEnabled(true);
+        
+        txtWStAdd.setEnabled(true);
+        txtWUnit.setEnabled(true);
+        txtWCity.setEnabled(true);
+        txtWState.setEnabled(true);
+        txtWZip.setEnabled(true);
+        txtWPhone.setEnabled(true);
+        
+        btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
+    }
+
 }

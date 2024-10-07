@@ -95,11 +95,21 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
         btnView.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         btnView.setForeground(new java.awt.Color(255, 255, 255));
         btnView.setText("View Profile");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(0, 0, 153));
         btnDelete.setFont(new java.awt.Font("Rockwell", 0, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete Profile");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -179,6 +189,42 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblProfiles.getSelectedRow();
+        
+        if(selectedRow >= 0){
+            Person selectedPerson = (Person) tblProfiles.getValueAt(selectedRow, 0);
+            
+            ViewPersonJPanel panel = new ViewPersonJPanel(userProcessContainer, personDirectory, selectedPerson);
+            userProcessContainer.add("ViewPersonJPanel", panel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+            
+        } else{
+            JOptionPane.showMessageDialog(null, "Please select a profile from the list view", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblProfiles.getSelectedRow();
+        
+        if(selectedRow >= 0){
+            
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected profile?", "Warning", dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION){
+                Person selectedPerson = (Person) tblProfiles.getValueAt(selectedRow, 0);
+                personDirectory.deletePerson(selectedPerson);
+                populateTable();
+            }
+            
+        } else{
+            JOptionPane.showMessageDialog(null, "Please select a profile from the list", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -199,7 +245,7 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
         for (Person p : personDirectory.getPerson()) {
             
             Object[] row = new Object[6];
-            row[0] = p.getFname();
+            row[0] = p;
             row[1] = p.getLname();
             row[2] = String.valueOf(p.getAge());
             row[3] = String.valueOf(p.getSsn());

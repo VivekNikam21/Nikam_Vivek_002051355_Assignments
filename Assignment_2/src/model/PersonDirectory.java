@@ -29,7 +29,7 @@ public class PersonDirectory {
         return p;
 }
     public void deletePerson(Person person){
-        personList.remove(personList);
+        personList.remove(person);
     }
     
     public Person searchPerson(String search){
