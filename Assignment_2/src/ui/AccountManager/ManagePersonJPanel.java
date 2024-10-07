@@ -250,10 +250,17 @@ public class ManagePersonJPanel extends javax.swing.JPanel {
             row[2] = String.valueOf(p.getAge());
             row[3] = String.valueOf(p.getSsn());
             Address hadd = p.getAddress();
-            String haddr = hadd.getHstreetadd() + ", " + hadd.getHunitno() + ", " + hadd.getHcity() + ", " + hadd.getHstate() + " " + hadd.getHzip()+ " " + hadd.getHphone();
+             String haddr = "N/A";
+        if (hadd != null) {
+            haddr = hadd.getHstreetadd() + ", " + hadd.getHunitno() + ", " + hadd.getHcity() + ", " + hadd.getHstate() + " " + hadd.getHzip()+ " " + hadd.getHphone();
+        }
             row[4] = haddr;
             Address wadd = p.getAddress();
-            String waddr = wadd.getWstreetadd() + ", " + wadd.getWunitno() + ", " + wadd.getWcity() + ", " + wadd.getWstate() + " " + wadd.getWzip()+ " " + wadd.getWphone();
+            
+            String waddr = "N/A"; 
+        if (wadd != null) {
+            waddr = wadd.getWstreetadd() + ", " + wadd.getWunitno() + ", " + wadd.getWcity() + ", " + wadd.getWstate() + " " + wadd.getWzip()+ " " + wadd.getWphone();
+        }
             row[5] = waddr;
             model.addRow(row);
         }

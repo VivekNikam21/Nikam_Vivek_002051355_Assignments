@@ -5,6 +5,8 @@
 package ui;
 
 import java.awt.CardLayout;
+import model.Address;
+import model.Person;
 import model.PersonDirectory;
 import ui.AccountManager.PersonMngWorkAreaJPanel;
 
@@ -22,6 +24,7 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         
         this.personDirectory = new PersonDirectory();
+        generateDemoData();
     }
 
     /**
@@ -141,4 +144,46 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel topJPanel;
     private javax.swing.JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
+private void generateDemoData(){
+        
+        Person firstPerson = personDirectory.addPerson();
+        firstPerson.setFname("Vivek");
+        firstPerson.setLname("Nikam");
+        firstPerson.setAge(25);
+        firstPerson.setSsn(1234567890);
+        firstPerson.setAddress("92 Bragdon", "Unit 3", "boston", "MA", 2119L, 61742893892.0, "326 Huntington Ave", "Unit 2", "Boston", "MA", 2115L, 3762378273.0);
+        
+        
+        Person secondPerson = personDirectory.addPerson();
+        secondPerson.setFname("Rahul");
+        secondPerson.setLname("Patil");
+        secondPerson.setAge(25);
+        secondPerson.setSsn(1234567890);
+        secondPerson.setAddress("92 Bragdon", "Unit 3", "boston", "MA", 2119L, 61742893892.0, "326 Huntington Ave", "Unit 2", "Boston", "MA", 2115L, 3762378273.0);
+
+        
+        Person thirdPerson = personDirectory.addPerson();
+        thirdPerson.setFname("TharunShrey");
+        thirdPerson.setLname("G");
+        thirdPerson.setAge(25);
+        thirdPerson.setSsn(1234567890);
+        thirdPerson.setAddress("92 Bragdon", "Unit 3", "boston", "MA", 2119L, 61742893892.0, "326 Huntington Ave", "Unit 2", "Boston", "MA", 2115L, 3762378273.0);
+
+        
+        Person fourthPerson = personDirectory.addPerson();
+        fourthPerson.setFname("Shreyash");
+        fourthPerson.setLname("Prakash");
+        fourthPerson.setAge(25);
+        fourthPerson.setSsn(1234567890);
+        fourthPerson.setAddress("92 Bragdon", "Unit 3", "boston", "MA", 2119L, 61742893892.0, "326 Huntington Ave", "Unit 2", "Boston", "MA", 2115L, 3762378273.0);
+
+        
+        Person fifthPerson = personDirectory.addPerson();
+        fifthPerson.setFname("Varun");
+        fifthPerson.setLname("Nayyar");
+        fifthPerson.setAge(25);
+        fifthPerson.setSsn(1234567890);
+        fifthPerson.setAddress("92 Bragdon", "Unit 3", "boston", "MA", 2119L, 61742893892.0, "326 Huntington Ave", "Unit 2", "Boston", "MA", 2115L, 3762378273.0); 
+    }
+
 }
