@@ -21,15 +21,15 @@ public class Person {
     }
 
     public void setAddress(String hstreetadd, String hunitno, String hcity, String hstate, Long hzip, Double hphone, String wstreetadd, String wunitno, String wcity, String wstate, Long wzip, Double wphone) {
-        Address address = new Address();  // Create a new Address object
+        Address address = new Address();  
         address.setHstreetadd(hstreetadd);
         address.setHunitno(hunitno);
         address.setHcity(hcity);
         address.setHstate(hstate);
         address.setHzip(hzip);
-        address.setHphone(hphone);  // Assuming phone is String
+        address.setHphone(hphone);  
 
-        // Set work address details
+   
         address.setWstreetadd(wstreetadd);
         address.setWunitno(wunitno);
         address.setWcity(wcity);
@@ -38,6 +38,7 @@ public class Person {
         address.setWphone(wphone);
         
         this.address = address;
+        
     }
     
     public String getFname() {
