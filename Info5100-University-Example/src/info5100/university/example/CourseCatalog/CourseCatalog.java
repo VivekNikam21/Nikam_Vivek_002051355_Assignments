@@ -28,6 +28,7 @@ public class CourseCatalog {
     public Course newCourse(String n, String nm, int cr){
         Course c = new Course(n, nm, cr);
         courselist.add(c);
+        lastupdated = java.time.LocalDateTime.now().toString();
         return c;
     }
     
@@ -35,9 +36,20 @@ public class CourseCatalog {
         
         for( Course c: courselist){
             
-            if(c.getCOurseNumber().equals(n)) return c;
+            if(c.getCourseNumber().equals(n)) return c;
         }
         return null;
+    }
+    
+    public void displayCourses() {
+        System.out.println("Courses in the Course Catalog:");
+        for (Course course : courselist) {
+            System.out.println("Course Number: " + course.getCourseNumber()
+                    + ", Name: " + course.getCourseName()
+                    + ", Credits: " + course.getCredits()
+                    + ", Price: $" + course.getCoursePrice());
+        }
+        System.out.println("Last updated: " + lastupdated);
     }
 
 }

@@ -57,5 +57,8 @@ public class CourseSchedule {
         }
         return sum;
     }
+    public ArrayList<CourseOffer> getAllCourseOffers() {
+    return schedule; 
+}
 
 }

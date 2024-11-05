@@ -35,7 +35,7 @@ public class CourseOffer {
     }
 
     public String getCourseNumber() {
-        return course.getCOurseNumber();
+        return course.getCourseNumber();
     }
 
     public void generatSeats(int n) {
@@ -89,5 +89,10 @@ public class CourseOffer {
     public int getCreditHours(){
         return course.getCredits();
     }
+    
+    public ArrayList<Seat> getSeatList() {
+        return seatlist;
+    }
+
 
 }

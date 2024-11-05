@@ -55,4 +55,10 @@ public class StudentProfile {
         return transcript.getCourseList();
 
     }
+    
+    
+    public String getStudentName() {
+    return person.getFullName(); 
+}
+
 }

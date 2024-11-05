@@ -13,6 +13,7 @@ import info5100.university.example.CourseSchedule.CourseSchedule;
 import info5100.university.example.Degree.Degree;
 import info5100.university.example.Employer.EmployerDirectory;
 import info5100.university.example.Persona.Faculty.FacultyDirectory;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
 import info5100.university.example.Persona.StudentProfile;
@@ -41,6 +42,7 @@ public class Department {
         studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
         persondirectory = new PersonDirectory();
         degree = new Degree("MSIS");
+        facultydirectory = new FacultyDirectory(this);
         
     }
     public void addCoreCourse(Course c){
@@ -107,4 +109,18 @@ public void addElectiveCourse(Course c){
         co.assignEmptySeat(cl);
 
     }
+    
+    public void assignFacultyToCourse(String facultyId, String courseNumber, String semester) {
+        FacultyProfile faculty = facultydirectory.findTeachingFaculty(facultyId);
+        if (faculty != null) {
+            CourseSchedule courseSchedule = mastercoursecatalog.get(semester);
+            if (courseSchedule != null) {
+                CourseOffer courseOffer = courseSchedule.getCourseOfferByNumber(courseNumber);
+                if (courseOffer != null) {
+                    courseOffer.AssignAsTeacher(faculty);  // Assuming there's an assignFaculty method in CourseOffer
+                }
+            }
+        }
+    }
+
 }

@@ -22,8 +22,11 @@ public class Course {
         credits = ch;
 
     }
-
-    public String getCOurseNumber() {
+    
+    public String getCourseName(){
+        return name;
+    }
+    public String getCourseNumber() {
         return number;
     }
 

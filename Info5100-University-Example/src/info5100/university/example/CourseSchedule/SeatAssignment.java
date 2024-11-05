@@ -6,6 +6,7 @@
 package info5100.university.example.CourseSchedule;
 
 import info5100.university.example.CourseCatalog.Course;
+import info5100.university.example.Persona.StudentProfile;
 
 /**
  *
@@ -21,6 +22,9 @@ public class SeatAssignment {
         courseload = cl;
     }
      
+    public void setGrade(float grade) {
+        this.grade = grade;
+    }
     public boolean getLike(){
         return like;
     }
@@ -47,6 +51,14 @@ public class SeatAssignment {
         return getCreditHours()*grade;
     }
     
+    public StudentProfile getStudentProfile() {
+    return courseload.getStudentProfile(); // Assuming CourseLoad has a getStudentProfile() method
+}
+    
+    public float getGrade() {
+        return grade;
+    }
+
     
     
 }
