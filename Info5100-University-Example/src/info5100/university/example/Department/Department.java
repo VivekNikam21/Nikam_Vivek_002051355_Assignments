@@ -10,6 +10,7 @@ import info5100.university.example.CourseCatalog.CourseCatalog;
 import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
+import info5100.university.example.CourseSchedule.Seat;
 import info5100.university.example.Degree.Degree;
 import info5100.university.example.Employer.EmployerDirectory;
 import info5100.university.example.Persona.Faculty.FacultyDirectory;
@@ -122,5 +123,33 @@ public void addElectiveCourse(Course c){
             }
         }
     }
+    
+    public void printSemesterReport(String semester) {
+        CourseSchedule courseSchedule = getCourseSchedule(semester);
+        if (courseSchedule == null) {
+            System.out.println("No course schedule found for semester: " + semester);
+            return;
+        }
+
+        System.out.println("Report for Semester: " + semester);
+        System.out.println("-----------------------------------------------------");
+
+        for (CourseOffer courseOffer : courseSchedule.getAllCourseOffers()) {
+            System.out.println("Course: " + courseOffer.getCourseNumber() + " - " + courseOffer.getSubjectCourse().getCourseName());
+            for (Seat seat : courseOffer.getSeatList()) { // Assuming you have a method to get all seats for a course offer
+                if (seat.isOccupied()) { // Check if the seat is occupied
+                    StudentProfile student = seat.getAssignedStudent(); // Get the student assigned to the seat
+                    int grade = seat.getGrade(); // Assuming the Seat class has a method to get the grade
+                    int tuition = courseOffer.getTuitionForStudent(student); // Get tuition for the student
+
+                    System.out.println("Student: " + student.getName() + " | Grade: " + grade + " | Tuition: $" + tuition);
+                }
+            }
+        }
+
+        System.out.println("-----------------------------------------------------");
+    }
+
+
 
 }
