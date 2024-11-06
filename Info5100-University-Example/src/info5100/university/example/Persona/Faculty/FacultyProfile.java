@@ -57,5 +57,9 @@ public class FacultyProfile {
         }
         return false;
     }
+    
+    public String getName() {
+        return person.getFullName();  
+    }
 
 }

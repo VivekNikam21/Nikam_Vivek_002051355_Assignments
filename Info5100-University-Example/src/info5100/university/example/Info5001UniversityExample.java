@@ -10,6 +10,7 @@ import info5100.university.example.CourseCatalog.CourseCatalog;
 import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
+import info5100.university.example.CourseSchedule.SeatAssignment;
 import info5100.university.example.Department.Department;
 import info5100.university.example.Persona.Person;
 import info5100.university.example.Persona.PersonDirectory;
@@ -90,9 +91,9 @@ public class Info5001UniversityExample {
 
     private static void registerStudentForCourses(StudentProfile studentProfile, CourseSchedule courseSchedule) {
         // Register the student for the core course and some electives
-        CourseOffer coreOffer = courseSchedule.getCourseOffer("INFO 5100");
-        CourseOffer electiveOffer1 = courseSchedule.getCourseOffer("INFO 5200"); // Example for one elective
-        CourseOffer electiveOffer2 = courseSchedule.getCourseOffer("INFO 5300"); // Example for another elective
+        CourseOffer coreOffer = courseSchedule.getCourseOfferByNumber("INFO 5100");
+        CourseOffer electiveOffer1 = courseSchedule.getCourseOfferByNumber("INFO 5200"); // Example for one elective
+        CourseOffer electiveOffer2 = courseSchedule.getCourseOfferByNumber("INFO 5300"); // Example for another elective
         
         // Assuming we have logic to check seat availability, etc.
         if (coreOffer != null) {
@@ -107,13 +108,14 @@ public class Info5001UniversityExample {
     }
 
     private static void printStudentReport(ArrayList<StudentProfile> students, CourseSchedule courseSchedule) {
-        System.out.println("Student Registration Report for Fall 2020:");
+        System.out.println("Student Registration Report for Fall 2024:");
         for (StudentProfile student : students) {
-            System.out.println("Student: " + student.getPerson().getId());
-            CourseLoad courseLoad = student.getCourseLoad("Fall2020");
-            for (CourseOffer offer : courseLoad.getCourseOffers()) {
-                System.out.println(" - Enrolled in: " + offer.getCourse().getCourseName() + 
-                                   " taught by " + offer.getInstructor().getName());
+            System.out.println("Student: " + student.getPerson().getPersonId());
+            CourseLoad courseLoad = student.getCourseLoadBySemester("Fall2024");
+            for (SeatAssignment sa : courseLoad.getSeatAssignments()) {
+                CourseOffer offer = sa.getCourseOffer();
+                System.out.println(" - Enrolled in: " + offer.getSubjectCourse().getCourseName() + 
+                                   " taught by " + offer.getFacultyProfile().getName());
                 // Print grades, GPA, and tuition fees here
                 // Assuming there's a method to retrieve these details
             }

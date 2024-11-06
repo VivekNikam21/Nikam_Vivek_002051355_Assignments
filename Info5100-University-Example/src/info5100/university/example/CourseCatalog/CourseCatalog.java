@@ -28,7 +28,6 @@ public class CourseCatalog {
     public Course newCourse(String n, String nm, int cr){
         Course c = new Course(n, nm, cr);
         courselist.add(c);
-        lastupdated = java.time.LocalDateTime.now().toString();
         return c;
     }
     

@@ -20,6 +20,10 @@ public class StudentProfile {
     Transcript transcript;
     EmploymentHistroy employmenthistory;
 
+    public Person getPerson() {
+    return person;
+    
+    }
     public StudentProfile(Person p) {
 
         person = p;

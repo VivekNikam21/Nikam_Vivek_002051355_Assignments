@@ -94,9 +94,6 @@ public class CourseOffer {
     public ArrayList<Seat> getSeatList() {
         return seatlist;
     }
-    public int getTuitionForStudent(StudentProfile student) {
-    return tuitionAmount;
-    }
 
 
 }
