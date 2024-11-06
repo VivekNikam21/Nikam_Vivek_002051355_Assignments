@@ -111,7 +111,7 @@ public class Info5001UniversityExample {
         System.out.println("Student Registration Report for Fall 2024:");
         for (StudentProfile student : students) {
             System.out.println("Student: " + student.getPerson().getPersonId());
-            CourseLoad courseLoad = student.getCourseLoadBySemester("Fall2024");
+            CourseLoad courseLoad = student.getTranscript().getCourseLoadBySemester("Fall2024");
             for (SeatAssignment sa : courseLoad.getSeatAssignments()) {
                 CourseOffer offer = sa.getCourseOffer();
                 System.out.println(" - Enrolled in: " + offer.getSubjectCourse().getCourseName() + 

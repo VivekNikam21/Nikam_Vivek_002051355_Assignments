@@ -16,9 +16,10 @@ import java.util.ArrayList;
  */
 public class StudentProfile {
 
-    Person person;
-    Transcript transcript;
-    EmploymentHistroy employmenthistory;
+    private Person person ;
+    private Transcript transcript;
+    EmploymentHistroy employmentHistory;  
+    private ArrayList<CourseLoad> courseLoads;
 
     public Person getPerson() {
     return person;
@@ -26,9 +27,10 @@ public class StudentProfile {
     }
     public StudentProfile(Person p) {
 
-        person = p;
-        transcript = new Transcript(this);
-        employmenthistory = new EmploymentHistroy();
+        this.person = p;
+        this.transcript = new Transcript(this);
+        this.employmentHistory = new EmploymentHistroy(); // Fixed typo
+        this.courseLoads = new ArrayList<>();  // Initialize courseLoads
     }
 
     public boolean isMatch(String id) {
@@ -50,7 +52,6 @@ public class StudentProfile {
     }
 
     public CourseLoad newCourseLoad(String s) {
-
         return transcript.newCourseLoad(s);
     }
 
@@ -58,6 +59,10 @@ public class StudentProfile {
 
         return transcript.getCourseList();
 
+    }
+    
+    public float getTotalScore() {
+        return transcript.getStudentTotalScore();
     }
     
     
