@@ -127,5 +127,58 @@ public class Info5001UniversityExample {
     return students;
 }
 
+    private static void setFacultyRatings(CourseSchedule courseSchedule) {
+    CourseOffer[] courseOffers = courseSchedule.getAllCourseOffers();
 
+    // Debugging information
+    System.out.println("Total Course Offers- " + courseOffers.length);
+
+    if (courseOffers.length > 0 && courseOffers[0].getFacultyProfile() != null) {
+        FacultyAssignment assignment1 = courseOffers[0].getFacultyProfile().getFacultyAssignment();
+        if (assignment1 != null) {
+            assignment1.setProfRating(4.5); // For core course
+        }
+    }
+
+    if (courseOffers.length > 1 && courseOffers[1].getFacultyProfile() != null) {
+        FacultyAssignment assignment2 = courseOffers[1].getFacultyProfile().getFacultyAssignment();
+        if (assignment2 != null) {
+            assignment2.setProfRating(3.8); // For elective courses
+        }
+    } else {
+        System.out.println("Not enough course offers available");
+    }
+}
+
+    private static void generateSemesterReport(Map<String, StudentProfile> students, CourseSchedule courseSchedule) {
+        System.out.println("******* Fall 2024 Student Report *******");
+
+        for (StudentProfile student : students.values()) {
+            System.out.println("Student ID: " + student.getPerson().getPersonId());
+            System.out.println("Courses Registered:");
+            CourseLoad courseLoad = student.getCourseLoadBySemester("Fall2024");
+            double totalCredits = 0.0;
+            double totalGradePoints = 0.0;
+
+        
+            for (CourseOffer courseOffer : courseSchedule.getAllCourseOffers()) {
+                System.out.println(" * " + courseOffer.getSubjectCourse().getCourseName());
+                System.out.println("   Faculty: " + courseOffer.getFacultyProfile());
+
+                
+                double grade = 3 + Math.random(); 
+                System.out.println("   Grade- " + grade);
+                totalCredits += courseOffer.getSubjectCourse().getCredits();
+                totalGradePoints += grade * courseOffer.getSubjectCourse().getCredits();
+            }
+
+            double gpa = totalCredits == 0 ? 0 : totalGradePoints / totalCredits;
+            System.out.println("Average GPA for Semester- " + gpa);
+
+           
+            double tuitionFees = totalCredits * 1900; //1900 per credit fee
+            System.out.println("Total Fees- $" + tuitionFees);
+            System.out.println("**************************************************");
+        }
+    }
 }
