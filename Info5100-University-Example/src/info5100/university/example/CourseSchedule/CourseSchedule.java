@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class CourseSchedule {
 
     CourseCatalog coursecatalog;
-
+    private ArrayList<CourseOffer> courseOffers;    
     ArrayList<CourseOffer> schedule;
     String semester;
 
@@ -24,8 +24,18 @@ public class CourseSchedule {
         semester = s;
         coursecatalog = cc;
         schedule = new ArrayList();
+        courseOffers = new ArrayList<>();
 
     }
+    
+    public void addCourseOffer(CourseOffer courseOffer) {
+        courseOffers.add(courseOffer);
+    }
+    
+    public CourseOffer[] getAllCourseOffers() {
+        return courseOffers.toArray(new CourseOffer[0]);
+    }
+
 
     public CourseOffer newCourseOffer(String  n) {
 
@@ -57,8 +67,5 @@ public class CourseSchedule {
         }
         return sum;
     }
-    public ArrayList<CourseOffer> getAllCourseOffers() {
-    return schedule; 
-}
 
 }

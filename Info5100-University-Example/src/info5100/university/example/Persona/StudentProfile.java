@@ -16,22 +16,22 @@ import java.util.ArrayList;
  */
 public class StudentProfile {
 
-    private Person person ;
-    private Transcript transcript;
-    EmploymentHistroy employmentHistory;  
-    private ArrayList<CourseLoad> courseLoads;
+    Person person;
+    Transcript transcript;
+    EmploymentHistroy employmenthistory;
 
-    public Person getPerson() {
-    return person;
-    
-    }
     public StudentProfile(Person p) {
 
-        this.person = p;
-        this.transcript = new Transcript(this);
-        this.employmentHistory = new EmploymentHistroy(); // Fixed typo
-        this.courseLoads = new ArrayList<>();  // Initialize courseLoads
+        person = p;
+        transcript = new Transcript(this);
+        employmenthistory = new EmploymentHistroy();
     }
+    
+     // Add this method to return the person object
+    public Person getPerson() {
+        return person;
+    }
+
 
     public boolean isMatch(String id) {
         return person.getPersonId().equals(id);
@@ -52,6 +52,7 @@ public class StudentProfile {
     }
 
     public CourseLoad newCourseLoad(String s) {
+
         return transcript.newCourseLoad(s);
     }
 
@@ -60,14 +61,4 @@ public class StudentProfile {
         return transcript.getCourseList();
 
     }
-    
-    public float getTotalScore() {
-        return transcript.getStudentTotalScore();
-    }
-    
-    
-    public String getStudentName() {
-    return person.getFullName(); 
-}
-
 }

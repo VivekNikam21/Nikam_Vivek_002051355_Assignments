@@ -27,10 +27,16 @@ public class Transcript {
 
     }
 
+    public int getStudentSatisfactionIndex() {
+        //for each courseload 
+        //get seatassigmnets; 
+        //for each seatassignment add 1 if like =true;
+        return 0;
+    }
 
     public CourseLoad newCourseLoad(String sem) {
 
-        currentcourseload = new CourseLoad(sem, student);
+        currentcourseload = new CourseLoad(sem);
         courseloadlist.put(sem, currentcourseload);
         return currentcourseload;
     }
@@ -74,7 +80,8 @@ public class Transcript {
     //from seat assignments we will be able to access the course offers
 
     public ArrayList<SeatAssignment> getCourseList() {
-        ArrayList<SeatAssignment> temp2 = new ArrayList<>();
+        ArrayList temp2;
+        temp2 = new ArrayList();
 
         for (CourseLoad cl : courseloadlist.values()) { //extract cl list as objects --ignore label
             temp2.addAll(cl.getSeatAssignments()); //merge one array list to another

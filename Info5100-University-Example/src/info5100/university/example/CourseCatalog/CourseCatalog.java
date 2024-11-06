@@ -35,20 +35,9 @@ public class CourseCatalog {
         
         for( Course c: courselist){
             
-            if(c.getCourseNumber().equals(n)) return c;
+            if(c.getCOurseNumber().equals(n)) return c;
         }
         return null;
-    }
-    
-    public void displayCourses() {
-        System.out.println("Courses in the Course Catalog:");
-        for (Course course : courselist) {
-            System.out.println("Course Number: " + course.getCourseNumber()
-                    + ", Name: " + course.getCourseName()
-                    + ", Credits: " + course.getCredits()
-                    + ", Price: $" + course.getCoursePrice());
-        }
-        System.out.println("Last updated: " + lastupdated);
     }
 
 }

@@ -8,7 +8,6 @@ package info5100.university.example.Persona.Faculty;
 import info5100.university.example.Persona.*;
 import info5100.university.example.Department.Department;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
@@ -18,13 +17,11 @@ public class FacultyDirectory {
 
     Department department;
     ArrayList<FacultyProfile> teacherlist;
-    HashMap<String, FacultyProfile> facultyMap;
 
     public FacultyDirectory(Department d) {
 
         department = d;
         teacherlist = new ArrayList();
-        facultyMap = new HashMap<>();
 
     }
 
@@ -32,7 +29,6 @@ public class FacultyDirectory {
 
         FacultyProfile sp = new FacultyProfile(p);
         teacherlist.add(sp);
-        facultyMap.put(p.getPersonId(), sp);
         return sp;
     }
     
@@ -51,12 +47,13 @@ public class FacultyDirectory {
 
     public FacultyProfile findTeachingFaculty(String id) {
 
-        return facultyMap.get(id);
+        for (FacultyProfile sp : teacherlist) {
 
+            if (sp.isMatch(id)) {
+                return sp;
+            }
+        }
+            return null; //not found after going through the whole list
          }
-    
-    public ArrayList<FacultyProfile> getAllFaculty() {
-        return new ArrayList<>(facultyMap.values());
-    }
     
 }

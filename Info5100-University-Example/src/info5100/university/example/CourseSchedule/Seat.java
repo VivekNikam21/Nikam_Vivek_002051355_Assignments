@@ -5,8 +5,6 @@
  */
 package info5100.university.example.CourseSchedule;
 
-import info5100.university.example.Persona.StudentProfile;
-
 /**
  *
  * @author kal bugrara
@@ -17,7 +15,6 @@ public class Seat {
     int number;
     SeatAssignment seatassignment; //links back to studentprofile
     CourseOffer courseoffer;
-    StudentProfile studentProfile;
     public Seat (CourseOffer co, int n){
         courseoffer = co;
         number = n;
@@ -41,13 +38,4 @@ public class Seat {
     public int getCourseCredits(){
         return courseoffer.getCreditHours();
     }
-    
-    public SeatAssignment getSeatAssignment() {
-        return seatassignment;
-    }
-    
-    public StudentProfile getAssignedStudent() {
-        return studentProfile;
-    }
-
 }

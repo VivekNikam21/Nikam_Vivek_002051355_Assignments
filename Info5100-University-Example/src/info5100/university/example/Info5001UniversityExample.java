@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//all the packages and import statements
 package info5100.university.example;
 
 import info5100.university.example.CourseCatalog.Course;
@@ -10,13 +11,16 @@ import info5100.university.example.CourseCatalog.CourseCatalog;
 import info5100.university.example.CourseSchedule.CourseLoad;
 import info5100.university.example.CourseSchedule.CourseOffer;
 import info5100.university.example.CourseSchedule.CourseSchedule;
-import info5100.university.example.CourseSchedule.SeatAssignment;
 import info5100.university.example.Department.Department;
+import info5100.university.example.Persona.Faculty.FacultyAssignment;
+import info5100.university.example.Persona.Faculty.FacultyDirectory;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
 import info5100.university.example.Persona.Person;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
 import info5100.university.example.Persona.StudentProfile;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -29,98 +33,99 @@ public class Info5001UniversityExample {
      */
     public static void main(String[] args) {
         Department department = new Department("Information Systems");
+
+        // Creating courses
         CourseCatalog courseCatalog = department.getCourseCatalog();
+        Course coreCourse = courseCatalog.newCourse("AED", "INFO5100", 4);
+        Course elect1 = courseCatalog.newCourse("Database Management and Design", "DAMG6210", 4);
+        Course elect2 = courseCatalog.newCourse("Career Management", "ENCP6000", 1);
+        Course elect3 = courseCatalog.newCourse("Data Science methods and application", "INFO5400", 4);
+        Course elect4 = courseCatalog.newCourse("Web Design and User Experience Engineering", "INFO6150", 4);
+        Course elect5 = courseCatalog.newCourse("UI/UX", "INFO5600", 4);
 
-        // Create courses
-        Course coreCourse = courseCatalog.newCourse("Application Engineering", "INFO 5100", 4);
-        Course elective1 = courseCatalog.newCourse("Data Structures", "INFO 5200", 3);
-        Course elective2 = courseCatalog.newCourse("Database Management", "INFO 5300", 3);
-        Course elective3 = courseCatalog.newCourse("Web Development", "INFO 5400", 3);
-        Course elective4 = courseCatalog.newCourse("Software Testing", "INFO 5500", 3);
+        // Creating Faculties
+        FacultyDirectory facultyDirectory = department.getFacultyDirectory();
+        FacultyProfile fac1 = facultyDirectory.newFacultyProfile(new Person("Prof. Kal Bugrara"));
+        FacultyProfile fac2 = facultyDirectory.newFacultyProfile(new Person("Prof. Naveen Kuragayala"));
+        FacultyProfile fac3 = facultyDirectory.newFacultyProfile(new Person("Prof. Ariana Brody"));
+        FacultyProfile fac4 = facultyDirectory.newFacultyProfile(new Person("Prof. Dino Kostantopoulos"));
+        FacultyProfile fac5 = facultyDirectory.newFacultyProfile(new Person("Prof. Amuthan Arulraj"));
+        FacultyProfile fac6 = facultyDirectory.newFacultyProfile(new Person("Prof. John Doe"));
+
+        CourseSchedule courseSchedule = department.newCourseSchedule("Fall2024");
+        createCourseOffers(courseSchedule, coreCourse, elect1, elect2, elect3, elect4, elect5, fac1, fac2, fac3, fac4, fac5, fac6);
+
+        // Student Directory and Registration
+        Map<String, StudentProfile> students = registerStudents(department, courseSchedule, coreCourse, elect1, elect2, elect3, elect4, elect5);
+
+        setFacultyRatings(courseSchedule);  //Facutly rating
+        generateSemesterReport(students, courseSchedule); // report card
+
+        // Department revenue
+        int totalRevenue = department.calculateRevenuesBySemester("Fall2024");
+        System.out.println("Total Department Revenue for Fall 2024- $ " + totalRevenue);
+    }
+
+ private static void createCourseOffers(CourseSchedule courseSchedule, Course coreCourse, Course elect1,
+            Course elect2, Course elect3, Course elect4, Course elect5, FacultyProfile fac1,
+            FacultyProfile fac2, FacultyProfile fac3, FacultyProfile fac4, FacultyProfile fac5, FacultyProfile fac6) {
+    // Create course offers and assign faculty members
+        CourseOffer offerCore = courseSchedule.newCourseOffer(coreCourse.getCOurseNumber());
+        offerCore.AssignAsTeacher(fac1);
+        offerCore.generatSeats(10);
+
+        CourseOffer offerElect1 = courseSchedule.newCourseOffer(elect1.getCOurseNumber());
+        offerElect1.AssignAsTeacher(fac2);
+        offerElect1.generatSeats(10);
+
+        CourseOffer offerElect2 = courseSchedule.newCourseOffer(elect2.getCOurseNumber());
+        offerElect2.AssignAsTeacher(fac3);
+        offerElect2.generatSeats(10);
+
+        CourseOffer offerElect3 = courseSchedule.newCourseOffer(elect3.getCOurseNumber());
+        offerElect3.AssignAsTeacher(fac4);
+        offerElect3.generatSeats(10);
+
+        CourseOffer offerElect4 = courseSchedule.newCourseOffer(elect4.getCOurseNumber());
+        offerElect4.AssignAsTeacher(fac5);
+        offerElect4.generatSeats(10);
+
+        CourseOffer offerElect5 = courseSchedule.newCourseOffer(elect5.getCOurseNumber());
+        offerElect5.AssignAsTeacher(fac6);
+        offerElect5.generatSeats(10);
+
+        courseSchedule.addCourseOffer(offerCore);
+        courseSchedule.addCourseOffer(offerElect1);
+        courseSchedule.addCourseOffer(offerElect2);
+        courseSchedule.addCourseOffer(offerElect3);
+        courseSchedule.addCourseOffer(offerElect4);
+        courseSchedule.addCourseOffer(offerElect5);
+}
+ 
+    private static Map<String, StudentProfile> registerStudents(Department department, CourseSchedule courseSchedule,
+            Course coreCourse, Course elect1, Course elect2, Course elect3, Course elect4, Course elect5) {
+    PersonDirectory personDirectory = department.getPersonDirectory();
+    StudentDirectory studentDirectory = department.getStudentDirectory();
+    Map<String, StudentProfile> students = new HashMap<>();
+
+    for (int i = 1; i <= 10; i++) {
+        Person person = personDirectory.newPerson("002051355" + i);
+        StudentProfile student = studentDirectory.newStudentProfile(person);
+        students.put("Student" + i, student);
+
+        // Course load for Fall 2023 semester
+        CourseLoad courseLoad = student.newCourseLoad("Fall2024");
         
-        // Create a new course schedule
-        CourseSchedule courseSchedule = department.newCourseSchedule("Fall2020");
-
-        // Create course offers and generate seats
-        CourseOffer coreCourseOffer = courseSchedule.newCourseOffer(coreCourse.getCourseNumber());
-        if (coreCourseOffer != null) {
-            coreCourseOffer.generatSeats(30); // Example: 30 seats for core course
-        }
-
-        CourseOffer electiveOffer1 = courseSchedule.newCourseOffer(elective1.getCourseNumber());
-        if (electiveOffer1 != null) {
-            electiveOffer1.generatSeats(20); // Example: 20 seats for Data Structures
-        }
-
-        CourseOffer electiveOffer2 = courseSchedule.newCourseOffer(elective2.getCourseNumber());
-        if (electiveOffer2 != null) {
-            electiveOffer2.generatSeats(20); // Example: 20 seats for Database Management
-        }
-
-        CourseOffer electiveOffer3 = courseSchedule.newCourseOffer(elective3.getCourseNumber());
-        if (electiveOffer3 != null) {
-            electiveOffer3.generatSeats(20); // Example: 20 seats for Web Development
-        }
-
-        CourseOffer electiveOffer4 = courseSchedule.newCourseOffer(elective4.getCourseNumber());
-        if (electiveOffer4 != null) {
-            electiveOffer4.generatSeats(20); // Example: 20 seats for Software Testing
-        }
-
-        // Create person directory and student directory
-        PersonDirectory personDirectory = department.getPersonDirectory();
-        StudentDirectory studentDirectory = department.getStudentDirectory();
-
-        // Add students
-        ArrayList<StudentProfile> students = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            Person person = personDirectory.newPerson("Student0" + (i + 1));
-            StudentProfile studentProfile = studentDirectory.newStudentProfile(person);
-            students.add(studentProfile);
-            // Register each student for courses
-            registerStudentForCourses(studentProfile, courseSchedule);
-        }
-
-        // Calculate and print total revenues for the semester
-        int totalRevenue = department.calculateRevenuesBySemester("Fall2020");
-        System.out.println("Total Revenue for Fall 2020: " + totalRevenue);
-
-        // Print detailed report of student registrations
-        printStudentReport(students, courseSchedule);
+        // Use the correct method to get course offers by number
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(coreCourse.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elect1.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elect2.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elect3.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elect4.getCOurseNumber()));
+            courseLoad.newSeatAssignment(courseSchedule.getCourseOfferByNumber(elect5.getCOurseNumber()));
     }
+    return students;
+}
 
-    private static void registerStudentForCourses(StudentProfile studentProfile, CourseSchedule courseSchedule) {
-        // Register the student for the core course and some electives
-        CourseOffer coreOffer = courseSchedule.getCourseOfferByNumber("INFO 5100");
-        CourseOffer electiveOffer1 = courseSchedule.getCourseOfferByNumber("INFO 5200"); // Example for one elective
-        CourseOffer electiveOffer2 = courseSchedule.getCourseOfferByNumber("INFO 5300"); // Example for another elective
-        
-        // Assuming we have logic to check seat availability, etc.
-        if (coreOffer != null) {
-            studentProfile.newCourseLoad("Fall2020").newSeatAssignment(coreOffer);
-        }
-        if (electiveOffer1 != null) {
-            studentProfile.newCourseLoad("Fall2020").newSeatAssignment(electiveOffer1);
-        }
-        if (electiveOffer2 != null) {
-            studentProfile.newCourseLoad("Fall2020").newSeatAssignment(electiveOffer2);
-        }
-    }
-
-    private static void printStudentReport(ArrayList<StudentProfile> students, CourseSchedule courseSchedule) {
-        System.out.println("Student Registration Report for Fall 2024:");
-        for (StudentProfile student : students) {
-            System.out.println("Student: " + student.getPerson().getPersonId());
-            CourseLoad courseLoad = student.getTranscript().getCourseLoadBySemester("Fall2024");
-            for (SeatAssignment sa : courseLoad.getSeatAssignments()) {
-                CourseOffer offer = sa.getCourseOffer();
-                System.out.println(" - Enrolled in: " + offer.getSubjectCourse().getCourseName() + 
-                                   " taught by " + offer.getFacultyProfile().getName());
-                // Print grades, GPA, and tuition fees here
-                // Assuming there's a method to retrieve these details
-            }
-            System.out.println(); // For spacing
-        }
-    }
 
 }
